@@ -1,4 +1,4 @@
-package domain;
+package br.com.sistemacontroledespesas.api.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
