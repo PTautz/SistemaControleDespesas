@@ -31,4 +31,13 @@ public class Despesa {
     public void setDataDespesa(LocalDateTime dataDespesa) {
         this.dataDespesa = dataDespesa;
     }
+
+    @Override
+    public String toString() {
+        return "Despesa{" +
+                "valor=" + valor +
+                ", nomeDespesa='" + nomeDespesa + '\'' +
+                ", dataDespesa=" + dataDespesa +
+                '}';
+    }
 }
