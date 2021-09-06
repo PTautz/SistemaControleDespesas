@@ -4,6 +4,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,10 +14,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 //Classe que define objeto de configuração da aplcação (beans)
 public class SimpleMongoConfig {
 
-//trocar senha do mongo na url : colocarsenhaaqui@mongodb-despesas.6phge.mongodb.net
+    //Cria o objeto para abrir a conexão com o banco
     @Bean
     public MongoClient mongo() {
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://despesas-mongo-user:colocarsenhaaqui@mongodb-despesas.6phge.mongodb.net/mongodb-despesas?retryWrites=true&w=majority");
+        String urlMongo = System.getenv("URLMongo");
+        //Configuração específica do MongoDB para conexão com o banco
+        ConnectionString connectionString = new ConnectionString(urlMongo);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();
