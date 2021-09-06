@@ -1,9 +1,13 @@
 package br.com.sistemacontroledespesas.api.controller;
 
 import br.com.sistemacontroledespesas.api.domain.Despesa;
+import br.com.sistemacontroledespesas.api.repository.DespesaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -14,7 +18,11 @@ public class DespesaController {
     //final define uma constante
     private static final Logger log = LoggerFactory.getLogger(DespesaController.class);
 
-    @GetMapping("/obtemDespesa")
+    //Anotação que instancia o objeto automaticamente
+    @Autowired
+    private DespesaRepository despesaRepository;
+
+    @GetMapping("/obtem-despesa")
     public Despesa obtemDespesa() {
         //metodo que cria objeto para retornar despesa
         Despesa mensal = new Despesa();
@@ -28,5 +36,11 @@ public class DespesaController {
         log.info("Obtendo Despesa {}",mensal);
         return mensal;
     }
-
+    //(parametro sempre tipo(M) e nome(m)
+    @PostMapping("/despesa")
+    //RequestBody coloca o corpo(dados) da requisição pra dentro do parâmetro do método
+    public void salvarDespesa(@RequestBody Despesa despesa) {
+        log.info("Salvando despesa {}",despesa);
+        despesaRepository.save(despesa);
+    }
 }

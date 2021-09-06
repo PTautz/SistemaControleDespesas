@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Despesa {
+
     private BigDecimal valor;
     private String nomeDespesa;
     private LocalDateTime dataDespesa;
