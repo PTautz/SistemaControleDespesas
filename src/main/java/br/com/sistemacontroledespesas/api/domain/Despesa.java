@@ -1,10 +1,15 @@
 package br.com.sistemacontroledespesas.api.domain;
 
+import org.springframework.data.annotation.Id;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Despesa {
 
+
+    @Id
+    private String id;
     private BigDecimal valor;
     private String nomeDespesa;
     private LocalDateTime dataDespesa;
@@ -33,10 +38,19 @@ public class Despesa {
         this.dataDespesa = dataDespesa;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Despesa{" +
-                "valor=" + valor +
+                "id='" + id + '\'' +
+                ", valor=" + valor +
                 ", nomeDespesa='" + nomeDespesa + '\'' +
                 ", dataDespesa=" + dataDespesa +
                 '}';

@@ -5,10 +5,7 @@ import br.com.sistemacontroledespesas.api.repository.DespesaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,8 +19,9 @@ public class DespesaController {
     @Autowired
     private DespesaRepository despesaRepository;
 
-    @GetMapping("/obtem-despesa")
-    public Despesa obtemDespesa() {
+
+    @GetMapping("/obtem-despesa/{valor}")
+    public Despesa obtemDespesa(@PathVariable String valor) {
         //metodo que cria objeto para retornar despesa
         Despesa mensal = new Despesa();
         //Usando o 'set' para passar parâmetros de teste
@@ -34,7 +32,10 @@ public class DespesaController {
 
         //chave recebe o objeto mensal de parâmetro
         log.info("Obtendo Despesa {}",mensal);
+        log.info("Obtendo valor {}",valor);
         return mensal;
+
+
     }
     //(parametro sempre tipo(M) e nome(m)
     @PostMapping("/despesa")
