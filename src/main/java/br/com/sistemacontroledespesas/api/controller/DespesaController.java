@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
 public class DespesaController {
@@ -20,23 +21,22 @@ public class DespesaController {
     private DespesaRepository despesaRepository;
 
 
-    @GetMapping("/obtem-despesa/{valor}")
-    public Despesa obtemDespesa(@PathVariable String valor) {
-        //metodo que cria objeto para retornar despesa
-        Despesa mensal = new Despesa();
-        //Usando o 'set' para passar parâmetros de teste
-        mensal.setNomeDespesa("Janeiro");
-        mensal.setValor(new BigDecimal(700));
-        //LocalDateTime para pegar a data atual - now é o método
-        mensal.setDataDespesa(LocalDateTime.now());
+    @GetMapping("/obtem-despesa/{valorId}")
+    public Despesa obtemDespesa(@PathVariable String valorId) {
+        log.info("ID recebido como Parâmetro {}",valorId);
 
-        //chave recebe o objeto mensal de parâmetro
-        log.info("Obtendo Despesa {}",mensal);
-        log.info("Obtendo valor {}",valor);
-        return mensal;
-
-
+        //chamando método do despesaRepository para buscar a despesa pelo ID
+        Optional<Despesa> optionalDespesa = despesaRepository.findById(valorId);
+        if (optionalDespesa.isPresent()) {
+            Despesa d = optionalDespesa.get();
+            log.info("Despesa encontrada foi de: " + d);
+            return d;
+        } else {
+            log.info("Despesa não encontrada");
+            return null;
+        }
     }
+
     //(parametro sempre tipo(M) e nome(m)
     @PostMapping("/despesa")
     //RequestBody coloca o corpo(dados) da requisição pra dentro do parâmetro do método
