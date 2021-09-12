@@ -1,5 +1,6 @@
 package br.com.sistemacontroledespesas.api.controller;
 
+import br.com.sistemacontroledespesas.api.controller.param.DataFinalInicial;
 import br.com.sistemacontroledespesas.api.domain.Despesa;
 import br.com.sistemacontroledespesas.api.repository.DespesaRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,5 +45,15 @@ public class DespesaController {
     public void salvarDespesa(@RequestBody Despesa despesa) {
         log.info("Salvando despesa {}",despesa);
         despesaRepository.save(despesa);
+    }
+
+    @PostMapping("/obtemlistadespesa")
+    //Retorna lista de despesas por data inicial e final
+    public List<Despesa> obtemDespesa(@RequestBody DataFinalInicial datas) {
+
+        log.info("Obtendo despesa {}", datas);
+
+        return despesaRepository.findByDataDespesaBetween(datas.getDataInicial(),datas.getDataFinal());
+
     }
 }
