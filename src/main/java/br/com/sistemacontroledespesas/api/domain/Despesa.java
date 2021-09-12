@@ -1,15 +1,22 @@
 package br.com.sistemacontroledespesas.api.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
+
 
 public class Despesa {
 
 
     @Id
     private String id;
+    //@Field define o tipo a ser usado no banco de dados
+    @Field(targetType = DECIMAL128)
     private BigDecimal valor;
     private String nomeDespesa;
     private LocalDateTime dataDespesa;
