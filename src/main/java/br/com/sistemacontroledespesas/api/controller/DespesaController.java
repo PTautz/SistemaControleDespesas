@@ -1,6 +1,7 @@
 package br.com.sistemacontroledespesas.api.controller;
 
 import br.com.sistemacontroledespesas.api.controller.param.DataFinalInicial;
+import br.com.sistemacontroledespesas.api.controller.param.DespesaId;
 import br.com.sistemacontroledespesas.api.domain.Despesa;
 import br.com.sistemacontroledespesas.api.repository.DespesaRepository;
 import org.slf4j.Logger;
@@ -55,5 +56,10 @@ public class DespesaController {
 
         return despesaRepository.findByDataDespesaBetween(datas.getDataInicial(),datas.getDataFinal());
 
+    }
+    @DeleteMapping ("/deletadespesa")
+    public void deletarDespesa(@RequestBody DespesaId despesaId){
+        log.info("Deletando despesa {}",despesaId);
+        despesaRepository.deleteById(despesaId.getDespesaId());
     }
 }
