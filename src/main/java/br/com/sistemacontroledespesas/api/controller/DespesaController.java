@@ -57,8 +57,9 @@ public class DespesaController {
         return despesaRepository.findByDataDespesaBetween(datas.getDataInicial(),datas.getDataFinal());
 
     }
+
     @DeleteMapping ("/deletadespesa")
-    public void deletarDespesa(@RequestBody DespesaId despesaId){
+    public void deletarDespesa(@RequestBody DespesaId despesaId) {
         log.info("Deletando despesa {}",despesaId);
         despesaRepository.deleteById(despesaId.getDespesaId());
     }
