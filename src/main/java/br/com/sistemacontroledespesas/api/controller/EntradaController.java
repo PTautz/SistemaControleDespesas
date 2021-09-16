@@ -3,6 +3,7 @@ package br.com.sistemacontroledespesas.api.controller;
 import br.com.sistemacontroledespesas.api.controller.param.DataFinalInicial;
 import br.com.sistemacontroledespesas.api.controller.param.EntradaId;
 import br.com.sistemacontroledespesas.api.domain.Entrada;
+import br.com.sistemacontroledespesas.api.exception.DadosNaoEncontradosException;
 import br.com.sistemacontroledespesas.api.repository.EntradaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class EntradaController {
 
 
         @GetMapping("/obtem-entrada/{valorId}")
-        public Entrada obtemEntrada(@PathVariable String valorId) {
+        public Entrada obtemEntrada(@PathVariable String valorId) throws DadosNaoEncontradosException {
             log.info("ID recebido como Parâmetro {}",valorId);
 
             Optional<Entrada> optionalEntrada = entradaRepository.findById(valorId);
@@ -31,7 +32,7 @@ public class EntradaController {
                 return e;
             } else {
                 log.info("Entrada não encontrada");
-                return null;
+                throw new DadosNaoEncontradosException("Entrada não encontrada");
             }
         }
         @PostMapping("/entrada")
