@@ -2,7 +2,6 @@ package br.com.sistemacontroledespesas.api.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

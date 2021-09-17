@@ -1,6 +1,5 @@
 package br.com.sistemacontroledespesas.api.domain;
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 //Usando lombok para Getters/Setters

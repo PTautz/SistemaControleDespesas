@@ -3,14 +3,12 @@ package br.com.sistemacontroledespesas.api.controller;
 import br.com.sistemacontroledespesas.api.controller.param.DataFinalInicial;
 import br.com.sistemacontroledespesas.api.controller.param.DespesaId;
 import br.com.sistemacontroledespesas.api.domain.Despesa;
+import br.com.sistemacontroledespesas.api.exception.DadosNaoEncontradosException;
 import br.com.sistemacontroledespesas.api.repository.DespesaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +23,7 @@ public class DespesaController {
 
 
     @GetMapping("/obtem-despesa/{valorId}")
-    public Despesa obtemDespesa(@PathVariable String valorId) {
+    public Despesa obtemDespesa(@PathVariable String valorId) throws DadosNaoEncontradosException {
         log.info("ID recebido como Parâmetro {}",valorId);
 
         //chamando método do despesaRepository para buscar a despesa pelo ID
@@ -36,7 +34,7 @@ public class DespesaController {
             return d;
         } else {
             log.info("Despesa não encontrada");
-            return null;
+            throw new DadosNaoEncontradosException("Despesa não encontrada");
         }
     }
 
