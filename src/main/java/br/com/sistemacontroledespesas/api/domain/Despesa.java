@@ -3,7 +3,7 @@ package br.com.sistemacontroledespesas.api.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
 
@@ -16,7 +16,7 @@ public class Despesa {
     @Field(targetType = DECIMAL128)
     private BigDecimal valor;
     private String nomeDespesa;
-    private LocalDateTime dataDespesa;
+    private LocalDate dataDespesa;
 
     public BigDecimal getValor() {
         return valor;
@@ -34,11 +34,11 @@ public class Despesa {
         this.nomeDespesa = nomeDespesa;
     }
 
-    public LocalDateTime getDataDespesa() {
+    public LocalDate getDataDespesa() {
         return dataDespesa;
     }
 
-    public void setDataDespesa(LocalDateTime dataDespesa) {
+    public void setDataDespesa(LocalDate dataDespesa) {
         this.dataDespesa = dataDespesa;
     }
 

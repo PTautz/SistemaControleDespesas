@@ -1,5 +1,6 @@
 package br.com.sistemacontroledespesas.api.controller;
 
+import br.com.sistemacontroledespesas.api.controller.param.DataDespesa;
 import br.com.sistemacontroledespesas.api.controller.param.DataFinalInicial;
 import br.com.sistemacontroledespesas.api.controller.param.DespesaId;
 import br.com.sistemacontroledespesas.api.domain.Despesa;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +43,10 @@ public class DespesaController {
     //(parametro sempre tipo(M) e nome(m)
     @PostMapping("/despesa")
     //RequestBody coloca o corpo(dados) da requisição pra dentro do parâmetro do método
-    public void salvarDespesa(@RequestBody Despesa despesa) {
-        log.info("Salvando despesa {}",despesa);
+    public Despesa salvarDespesa(@RequestBody Despesa despesa) {
         despesaRepository.save(despesa);
+        log.info("Salvando despesa {}",despesa);
+        return despesa;
     }
 
     @PostMapping("/obtemlistadespesa")
@@ -60,5 +63,24 @@ public class DespesaController {
     public void deletarDespesa(@RequestBody DespesaId despesaId) {
         log.info("Deletando despesa {}",despesaId);
         despesaRepository.deleteById(despesaId.getDespesaId());
+    }
+    @PostMapping ("/despesa-recorrente")
+    public void recorrencia(@RequestBody DataDespesa dataDespesa) {
+        // salvar a primeira despesa
+        despesaRepository.save(dataDespesa.getDespesaInical());
+        log.info("Número de parcelas {}",dataDespesa.getNumeroDeVezes());
+
+        //laço de repetição para recorrência da despesa
+        for (int x = 1; x < dataDespesa.getNumeroDeVezes(); x++) {
+            // criar proxima despesa
+            Despesa despesa = new Despesa();
+            despesa.setValor(dataDespesa.getDespesaInical().getValor());
+            despesa.setNomeDespesa(dataDespesa.getDespesaInical().getNomeDespesa());
+            //(x = variável de contagem) representação(ChronoUnit) implementa a contagem dos meses na recorrência da despesa
+            despesa.setDataDespesa(dataDespesa.getDespesaInical().getDataDespesa().plus(x,ChronoUnit.MONTHS));
+            despesaRepository.save(despesa);
+
+        }
+
     }
 }

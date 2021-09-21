@@ -35,9 +35,11 @@ public class EntradaController {
             }
         }
         @PostMapping("/entrada")
-        public void salvarEntrada(@RequestBody Entrada entrada) {
-            log.info("Salvando entrada {}",entrada);
+        public Entrada salvarEntrada(@RequestBody Entrada entrada) {
             entradaRepository.save(entrada);
+            log.info("Salvando entrada {}",entrada);
+            //Retorna ID da entrada pra poder buscar por ela
+            return entrada;
         }
 
         @PostMapping("/obtemlistaentrada")

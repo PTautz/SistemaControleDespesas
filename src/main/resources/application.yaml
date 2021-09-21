@@ -1,0 +1,4 @@
+server:
+  error:
+    #Remove stacktrace da resposta padrão do Springboot
+    include-stacktrace: never

@@ -3,8 +3,7 @@ package br.com.sistemacontroledespesas.api.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
 public class Entrada {
@@ -16,7 +15,7 @@ public class Entrada {
     @Field(targetType = DECIMAL128)
     private BigDecimal valor;
     private String nomeEntrada;
-    private LocalDateTime dataEntrada;
+    private LocalDate dataEntrada;
 
     public String getId() {
         return id;
@@ -42,11 +41,11 @@ public class Entrada {
         this.nomeEntrada = nomeEntrada;
     }
 
-    public LocalDateTime getDataEntrada() {
+    public LocalDate getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(LocalDateTime dataEntrada) {
+    public void setDataEntrada(LocalDate dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 

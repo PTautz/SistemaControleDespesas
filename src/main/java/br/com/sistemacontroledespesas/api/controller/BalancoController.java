@@ -64,7 +64,7 @@ public class BalancoController {
         }
 
         // variavel do balanço = entradas - despesas
-        BigDecimal valorBalanco = new BigDecimal(0);
+        BigDecimal valorBalanco;
         valorBalanco = totalEntradas.subtract(totalDespesas);
         var balanco = new Balanco();
         // retornar objeto com o balanco
