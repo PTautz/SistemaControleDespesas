@@ -67,17 +67,17 @@ public class DespesaController {
     @PostMapping ("/despesa-recorrente")
     public void recorrencia(@RequestBody DataDespesa dataDespesa) {
         // salvar a primeira despesa
-        despesaRepository.save(dataDespesa.getDespesaInical());
+        despesaRepository.save(dataDespesa.getDespesaInicial());
         log.info("Número de parcelas {}",dataDespesa.getNumeroDeVezes());
 
         //laço de repetição para recorrência da despesa
         for (int x = 1; x < dataDespesa.getNumeroDeVezes(); x++) {
             // criar proxima despesa
             Despesa despesa = new Despesa();
-            despesa.setValor(dataDespesa.getDespesaInical().getValor());
-            despesa.setNomeDespesa(dataDespesa.getDespesaInical().getNomeDespesa());
+            despesa.setValor(dataDespesa.getDespesaInicial().getValor());
+            despesa.setNomeDespesa(dataDespesa.getDespesaInicial().getNomeDespesa());
             //(x = variável de contagem) representação(ChronoUnit) implementa a contagem dos meses na recorrência da despesa
-            despesa.setDataDespesa(dataDespesa.getDespesaInical().getDataDespesa().plus(x,ChronoUnit.MONTHS));
+            despesa.setDataDespesa(dataDespesa.getDespesaInicial().getDataDespesa().plus(x,ChronoUnit.MONTHS));
             despesaRepository.save(despesa);
 
         }

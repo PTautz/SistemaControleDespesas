@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class DataDespesa {
     //Ponto de partida da contagem da recorrência da despesa
-    private Despesa despesaInical;
+    private Despesa despesaInicial;
 
     //Quantas vezes a despesa ocorre
     private int numeroDeVezes;
