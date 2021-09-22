@@ -12,3 +12,4 @@ Usei o Mongo pela facilidade de integração e para testar a tecnologia.
  - Usando o Framework Springboot.
  - Maven para controle de dependências.
  - Postman para testar API.
+ - Junit/Mockito para testes código.
